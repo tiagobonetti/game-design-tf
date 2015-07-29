@@ -23,3 +23,4 @@ C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Deb
 C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.csprojResolveAssemblyReference.cache
 C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.exe
 C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.pdb
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\Content\arial20.xnb

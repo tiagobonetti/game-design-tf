@@ -6,11 +6,11 @@ namespace game_design_tf {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Game {
+    public class MainGame : Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game1()
+        public MainGame()
             : base() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -35,6 +35,7 @@ namespace game_design_tf {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Debug.LoadContent(Content);
 
             // TODO: use this.Content to load your game content here
         }
