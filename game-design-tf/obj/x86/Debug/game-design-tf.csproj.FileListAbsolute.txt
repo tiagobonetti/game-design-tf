@@ -24,3 +24,30 @@ C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\g
 C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.exe
 C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.pdb
 C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\Content\arial20.xnb
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.exe
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.pdb
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.csprojResolveAssemblyReference.cache
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Arial20.xnb
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\game-design-tf.exe
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\game-design-tf.pdb
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\MonoGame.Framework.dll
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.dll
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XAudio2.dll
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D11.dll
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.DXGI.dll
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct2D1.dll
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XInput.dll
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.RawInput.dll
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D9.dll
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\MonoGame.Framework.xml
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.xml
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XAudio2.xml
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D11.xml
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.DXGI.xml
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct2D1.xml
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XInput.xml
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.RawInput.xml
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D9.xml
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Sprite\Characters\Runner.png
