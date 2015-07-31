@@ -9,22 +9,24 @@ using System.Text;
 namespace game_design_tf {
     class Runner : BaseCharacter {
         public IPlayerInput PlayerInput { get; set; }
-        
 
         public Runner(Texture2D spriteSheet, MainGame.Tag tag, Vector2 position, string name, MainGame game)
             : base(spriteSheet, tag, position, name, game) {
             this.PlayerInput = null;
-            collision = new CollisionBox(this, new Vector2(uvRect.Center.X, uvRect.Center.Y), new Vector2(13, 48));
-            DEBUG_Collision.bodyCollisionList.Add(collision);
+            collision = new CollisionBox(this, uvRect);
+            DEBUG_Collision.CollisionList.Add(collision);
         }
 
-        public void Update(GameTime gameTime) {
-
+        new public void Update(GameTime gametime) {
             CharacterState state = CharacterState.Idle;
-            if (state == null)
-                state = CharacterState.Idle;
-
-            BaseUpdate(gameTime, state);
+            StateMachine(gametime, state);
+            if (canControl) {
+                Action(gametime);
+                if (canMove) {
+                    Movement(gametime);
+                }
+            }
+            ApplyPhysics(gametime);
         }
     }
 }

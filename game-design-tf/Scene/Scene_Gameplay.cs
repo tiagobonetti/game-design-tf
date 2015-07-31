@@ -10,16 +10,15 @@ using System.Text;
 namespace game_design_tf {
     public class Scene_Gameplay : Scene {
 
-        public const float floor = 430;
+        public IPlayerInput WhiteInput { get; set; }
         public int roundNumber = 0;
-        public Texture2D colSprite;
         Scoreboard scoreboard = new Scoreboard();
         DEBUG_Collision debugCollision = new DEBUG_Collision();
         Timer timer = new Timer();
         State state;
         Runner runner;
-        public IPlayerInput WhiteInput { get; set; }
-        Texture2D spritesheet;
+        Runner testDummy;
+        Texture2D characterSprite;
         Texture2D bg;
 
         public Scene_Gameplay(MainGame game) {
@@ -55,13 +54,14 @@ namespace game_design_tf {
                     runner.canControl = true;
                     break;
                 case State.EndRound:
-                    runner.canControl = true;
+                    runner.canControl = false;
                     EndRound(gameTime);
                     break;
             }
             debugCollision.Update(gameTime);
             Debug.Update();
             runner.Update(gameTime);
+            testDummy.Update(gameTime);
         }
 
         public void Draw() {
@@ -83,11 +83,12 @@ namespace game_design_tf {
                     break;
             }
             debugCollision.Draw(game.spriteBatch);
+            testDummy.Draw(game.spriteBatch);
         }
 
         void PreFight(GameTime gameTime) {
             bool timerEnded;
-            timer.TimerCounter(gameTime, 0.5f, out timerEnded);
+            timer.TimerCounter(gameTime, 0.01f, out timerEnded);
             if (timerEnded)
                 state = State.Play;
         }
@@ -118,6 +119,7 @@ namespace game_design_tf {
         }
 
         void DrawBackground() {
+            game.graphics.GraphicsDevice.Clear(Color.Black);
             /*
             Vector2 bgPos = new Vector2(game.graphics.PreferredBackBufferWidth * 0.5f, game.graphics.PreferredBackBufferHeight * 0.5f);
             game.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
@@ -126,23 +128,25 @@ namespace game_design_tf {
              * */
         }
 
+        public virtual void Init() {
+            //bg = game.Content.Load<Texture2D>("Sprites/Background/Bg");
+            characterSprite = game.Content.Load<Texture2D>("Sprite/Characters/Runner");
+            state = State.BuildGameObjects;
+        }
+
         void BuildGameObjects() {
 
             Vector2 runnerStartingPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.5f, game.graphics.PreferredBackBufferHeight * 0.5f);
-            runner = new Runner(spritesheet, MainGame.Tag.Runner, runnerStartingPosition, "p1", game);
+            runner = new Runner(characterSprite, MainGame.Tag.Runner, runnerStartingPosition, "p1", game);
             runner.velocity = Vector2.Zero;
-            state = State.PreGame;
-        }
 
-        public virtual void Init() {
-            /*
-            colSprite = game.Content.Load<Texture2D>("Sprites/Main Character/AttackCollision");
-            bg = game.Content.Load<Texture2D>("Sprites/Background/Bg");
-            fightText = game.Content.Load<Texture2D>("GUI/Fight");
-            koText = game.Content.Load<Texture2D>("GUI/KO");
-             * */
-            spritesheet = game.Content.Load<Texture2D>("Sprite/Characters/Runner");
-            state = State.BuildGameObjects;
+            Vector2 testDummyStartingPosition = new Vector2(1300f, 450f);
+            testDummy = new Runner(characterSprite, MainGame.Tag.Runner, testDummyStartingPosition, "p2", game);
+            testDummy.velocity = Vector2.Zero;
+            testDummy.canControl = false;
+            obj2 = testDummy;
+
+            state = State.PreGame;
         }
     }
 }

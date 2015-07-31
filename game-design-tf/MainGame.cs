@@ -39,7 +39,6 @@ namespace game_design_tf {
         }
 
         protected override void Draw(GameTime gameTime) {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
             sceneControl.Draw(spriteBatch, Content, graphics);
             base.Draw(gameTime);
         }
