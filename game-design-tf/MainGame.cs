@@ -4,25 +4,26 @@ using Microsoft.Xna.Framework.Input;
 
 namespace game_design_tf {
     public class MainGame : Game {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
-        IPlayerInput keyboard = new KeyboardInput(); 
-        IPlayerInput gamepad = new GamePadInput(PlayerIndex.One); 
+        public GraphicsDeviceManager graphics;
+        public SpriteBatch spriteBatch;
+        public SceneControl sceneControl;
 
         public MainGame()
             : base() {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1600;
+            graphics.PreferredBackBufferHeight = 900;
             Content.RootDirectory = "Content";
         }
 
         protected override void Initialize() {
             base.Initialize();
-            gamepad.DebugPosition = new Vector2(graphics.PreferredBackBufferWidth / 2.0f, 0.0f);
         }
 
         protected override void LoadContent() {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            sceneControl = new SceneControl(this);
+            sceneControl.EnterScene(SceneType.Gameplay);
             Debug.LoadContent(Content);
         }
 
@@ -32,18 +33,19 @@ namespace game_design_tf {
         protected override void Update(GameTime gameTime) {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            sceneControl.Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime) {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            sceneControl.Draw(spriteBatch, Content, graphics);
             base.Draw(gameTime);
+        }
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
-            keyboard.DrawDebug(spriteBatch);
-            gamepad.DrawDebug(spriteBatch);
-            spriteBatch.End();
-
+        public enum Tag{
+            Runner,
+            Bomber
         }
     }
 }
