@@ -11,58 +11,92 @@ namespace game_design_tf {
 
     class GamePadInput : IPlayerInput {
         public Vector2 DebugPosition { get; set; }
-        const float threshold = 0.75f;
-        PlayerIndex player;
+        public PlayerIndex Player { get; set; }
+
+        const float threshold = 0.5f;
 
         public GamePadInput(PlayerIndex player = PlayerIndex.One) {
             this.DebugPosition = Vector2.Zero;
-            this.player = player;
-        }
-        public InputState GetInput() {
-            return InputState.None;
+            this.Player = player;
         }
 
-        public InputState GetStick(Vector2 ThumbStick) {
-            if (ThumbStick.X > threshold) {
-            }
-            else if (ThumbStick.X < -threshold) {
-            }
-            else if (ThumbStick.Y > threshold) {
-            }
-            else if (ThumbStick.Y < -threshold) {
+        public bool GetButton1() {
+            GamePadState state = GamePad.GetState(Player, GamePadDeadZone.Circular);
+            return state.IsButtonDown(Buttons.X);
+        }
+
+        public bool GetButton2() {
+            GamePadState state = GamePad.GetState(Player, GamePadDeadZone.Circular);
+            return state.IsButtonDown(Buttons.A);
+        }
+
+        public Vector2 GetDirection() {
+            GamePadState state = GamePad.GetState(Player, GamePadDeadZone.Circular);
+            return FilterStick(state.ThumbSticks.Left);
+        }
+
+        public float VectorToAngle(Vector2 vector) {
+            return (float)Math.Atan2(vector.Y, vector.X);
+        }
+
+        public Vector2 FilterStick(Vector2 ThumbStick) {
+            if (ThumbStick.Length() > threshold) {
+                float angle = VectorToAngle(ThumbStick);
+                int slice_count = (int)(angle / (Math.PI / 8.0f));
+                switch (slice_count) {
+                    case 0:
+                        return new Vector2(1.0f, 0.0f);
+                    case 1:
+                    case 2:
+                        return new Vector2(1.0f, 1.0f);
+                    case 3:
+                    case 4:
+                        return new Vector2(0.0f, 1.0f);
+                    case 5:
+                    case 6:
+                        return new Vector2(-1.0f, 1.0f);
+                    case 7:
+                    case 8:
+                    case -7:
+                        return new Vector2(-1.0f, 0.0f);
+                    case -6:
+                    case -5:
+                        return new Vector2(-1.0f, -1.0f);
+                    case -4:
+                    case -3:
+                        return new Vector2(0.0f, -1.0f);
+                    case -2:
+                    case -1:
+                        return new Vector2(1.0f, -1.0f);
+                    default:
+                        return Vector2.Zero;
+                }
             }
             else {
-                ;
+                return Vector2.Zero;
             }
-                return InputState.None;
         }
 
         public void DrawDebug(SpriteBatch sb) {
-            /*
-            GamePadState state = GamePad.GetState(player, GamePadDeadZone.IndependentAxes);
+            GamePadState state = GamePad.GetState(Player, GamePadDeadZone.Circular);
             Vector2 pos = DebugPosition;
-            InputState left = GetStick(state.ThumbSticks.Left, orientation);
-            InputState right = GetStick(state.ThumbSticks.Right, orientation);
-            MenuInput menu = GetMenuInput();
+            Vector2 stick = GetDirection();
 
-            Debug.DrawText(sb, pos, "P " + player.ToString() + " : " + state.IsConnected.ToString());
+            Debug.DrawText(sb, pos, "P " + Player.ToString() + " : " + state.IsConnected.ToString());
             pos.Y += 30.0f;
-            Debug.DrawText(sb, pos, "Lx: " + state.ThumbSticks.Left.X.ToString());
-            pos.Y += 25.0f;
-            Debug.DrawText(sb, pos, "Ly: " + state.ThumbSticks.Left.Y.ToString());
-            pos.Y += 25.0f;
-            Debug.DrawText(sb, pos, "Rx: " + state.ThumbSticks.Right.X.ToString());
-            pos.Y += 25.0f;
-            Debug.DrawText(sb, pos, "Ry: " + state.ThumbSticks.Right.Y.ToString());
+            Debug.DrawText(sb, pos, "Stick(x;y): "
+                                    + state.ThumbSticks.Left.X.ToString("N2")
+                                    + " ; "
+                                    + state.ThumbSticks.Left.Y.ToString("N2"));
             pos.Y += 30.0f;
-            Debug.DrawText(sb, pos, "L: " + left.ToString());
-            pos.Y += 25.0f;
-            Debug.DrawText(sb, pos, "R: " + right.ToString());
+            Debug.DrawText(sb, pos, "Direction(x;y): "
+                                    + GetDirection().X.ToString("N2")
+                                    + " ; "
+                                    + GetDirection().Y.ToString("N2"));
             pos.Y += 30.0f;
-            Debug.DrawText(sb, pos, "Move: " + InputDictionary.GetMove(left, right, Modifier.None).ToString());
+            Debug.DrawText(sb, pos, "Button1: " + GetButton1().ToString());
             pos.Y += 30.0f;
-            Debug.DrawText(sb, pos, "Menu: " + menu);
-            */
+            Debug.DrawText(sb, pos, "Button2: " + GetButton2().ToString());
         }
     }
 }

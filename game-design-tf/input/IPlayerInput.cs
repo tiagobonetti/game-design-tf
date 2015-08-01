@@ -7,21 +7,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace game_design_tf {
 
-    public enum InputState {
-        None,
-        Up,
-        UpRight,
-        Right,
-        DownRight,
-        Down,
-        DownLeft,
-        Left,
-        UpLeft,
-    }
-
     public interface IPlayerInput {
         Vector2 DebugPosition { get; set; }
-        InputState GetInput();
+        Vector2 GetDirection();
+        bool GetButton1();
+        bool GetButton2();
         void DrawDebug(SpriteBatch sb);
     }
 }
