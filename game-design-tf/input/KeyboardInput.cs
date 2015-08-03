@@ -42,13 +42,13 @@ namespace game_design_tf {
             foreach (Keys key in pressed_wasd) {
                 switch (key) {
                     case Keys.W:
-                        Y += 1.0f;
+                        Y -= 1.0f;
                         break;
                     case Keys.A:
                         X -= 1.0f;
                         break;
                     case Keys.S:
-                        Y -= 1.0f;
+                        Y += 1.0f;
                         break;
                     case Keys.D:
                         X += 1.0f;

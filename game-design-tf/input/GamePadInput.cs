@@ -48,26 +48,26 @@ namespace game_design_tf {
                         return new Vector2(1.0f, 0.0f);
                     case 1:
                     case 2:
-                        return new Vector2(1.0f, 1.0f);
+                        return new Vector2(1.0f, -1.0f);
                     case 3:
                     case 4:
-                        return new Vector2(0.0f, 1.0f);
+                        return new Vector2(0.0f, -1.0f);
                     case 5:
                     case 6:
-                        return new Vector2(-1.0f, 1.0f);
+                        return new Vector2(-1.0f, -1.0f);
                     case 7:
                     case 8:
                     case -7:
                         return new Vector2(-1.0f, 0.0f);
                     case -6:
                     case -5:
-                        return new Vector2(-1.0f, -1.0f);
+                        return new Vector2(-1.0f, 1.0f);
                     case -4:
                     case -3:
-                        return new Vector2(0.0f, -1.0f);
+                        return new Vector2(0.0f, 1.0f);
                     case -2:
                     case -1:
-                        return new Vector2(1.0f, -1.0f);
+                        return new Vector2(1.0f, 1.0f);
                     default:
                         return Vector2.Zero;
                 }

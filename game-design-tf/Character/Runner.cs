@@ -10,8 +10,8 @@ namespace game_design_tf {
     class Runner : BaseCharacter {
         public IPlayerInput PlayerInput { get; set; }
 
-        public Runner(Texture2D spriteSheet, MainGame.Tag tag, Vector2 position, string name, MainGame game)
-            : base(spriteSheet, tag, position, name, game) {
+        public Runner(Texture2D spriteSheet, MainGame.Tag tag, Vector2 position, string name, MainGame game, IPlayerInput input)
+            : base(spriteSheet, tag, position, name, game, input) {
             this.PlayerInput = null;
             collision = new CollisionBox(this, uvRect);
             DEBUG_Collision.CollisionList.Add(collision);
