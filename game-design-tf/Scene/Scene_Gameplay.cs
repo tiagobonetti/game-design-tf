@@ -137,13 +137,14 @@ namespace game_design_tf {
         void BuildGameObjects() {
 
             Vector2 runnerStartingPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.5f, game.graphics.PreferredBackBufferHeight * 0.5f);
-            runner = new Runner(characterSprite, MainGame.Tag.Runner, runnerStartingPosition, "p1", game);
+            runner = new Runner(characterSprite, MainGame.Tag.Runner, runnerStartingPosition, "p1", game, new GamePadInput(PlayerIndex.One));
             runner.velocity = Vector2.Zero;
 
             Vector2 testDummyStartingPosition = new Vector2(1300f, 450f);
-            testDummy = new Runner(characterSprite, MainGame.Tag.Runner, testDummyStartingPosition, "p2", game);
+            testDummy = new Runner(characterSprite, MainGame.Tag.Runner, testDummyStartingPosition, "p2", game, new KeyboardInput()
+                );
             testDummy.velocity = Vector2.Zero;
-            testDummy.canControl = false;
+            //testDummy.canControl = false;
             obj2 = testDummy;
 
             state = State.PreGame;

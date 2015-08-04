@@ -51,3 +51,4 @@ D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\D
 D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.RawInput.xml
 D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D9.xml
 D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Sprite\Characters\Runner.png
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Sprite\Characters\Runner.png

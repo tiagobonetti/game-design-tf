@@ -25,15 +25,17 @@ namespace game_design_tf {
         public bool canMove = true;
         public CharacterState state = CharacterState.Idle;
         CharacterState previousState;
+        IPlayerInput input;
 
         Animator animator = new Animator();
 
-        public BaseCharacter(Texture2D spriteSheet, MainGame.Tag tag, Vector2 position, string name, MainGame game)
+        public BaseCharacter(Texture2D spriteSheet, MainGame.Tag tag, Vector2 position, string name, MainGame game, IPlayerInput input)
             : base(spriteSheet, tag, position, name, game) {
 
             uvRect = new Rectangle(0, 0, 50, 50);
             velocity = Vector2.Zero;
-            //      uvRect.Location = new Point(uvRect.Width * 5, uvRect.Height * 0);
+            this.input = input;
+
         }
 
         void EvalInput(GameTime gameTime, CharacterState newState) {
@@ -66,32 +68,18 @@ namespace game_design_tf {
 
         protected void Movement(GameTime gameTime) {
 
-            if (Keyboard.GetState().IsKeyDown(Keys.W) &&
-                Keyboard.GetState().IsKeyUp(Keys.S)) {
-                velocity.Y -= acceleration_Walk;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S) &&
-                Keyboard.GetState().IsKeyUp(Keys.W)) {
-                velocity.Y += acceleration_Walk;
-            }
-            else {
+
+            Vector2 direction = input.GetDirection();
+            if (direction == Vector2.Zero) {
+                velocity.X = MathHelper.Lerp(velocity.X, 0, deceleration_Walk);
+                if (MathHelper.Distance(velocity.X, 0) < 0.01f)
+                    velocity.X = 0;
                 velocity.Y = MathHelper.Lerp(velocity.Y, 0, deceleration_Walk);
                 if (MathHelper.Distance(velocity.Y, 0) < 0.01f)
                     velocity.Y = 0;
             }
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.A) &&
-                    Keyboard.GetState().IsKeyUp(Keys.D)) {
-                velocity.X -= acceleration_Walk;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D) &&
-                Keyboard.GetState().IsKeyUp(Keys.A)) {
-                velocity.X += acceleration_Walk;
-            }
             else {
-                velocity.X = MathHelper.Lerp(velocity.X, 0, deceleration_Walk);
-                if (MathHelper.Distance(velocity.X, 0) < 0.01f)
-                    velocity.X = 0;
+                velocity += direction * acceleration_Walk;
             }
             velocity = new Vector2(MathHelper.Clamp(velocity.X, -1f, 1f), MathHelper.Clamp(velocity.Y, -1f, 1f));
 
@@ -128,8 +116,8 @@ namespace game_design_tf {
 
             position += (velocity * speed_Walk) * (float)gameTime.ElapsedGameTime.TotalSeconds;
             //Clamp position to scene borders
-            position = new Vector2(MathHelper.Clamp(position.X, 0 + uvRect.Width * 0.5f, game.graphics.PreferredBackBufferWidth - uvRect.Width * 0.5f),
-                                   MathHelper.Clamp(position.Y, 0 + uvRect.Width * 0.5f, game.graphics.PreferredBackBufferHeight - uvRect.Height * 0.5f));
+            position = new Vector2(MathHelper.Clamp(position.X, 0 + uvRect.Width * 0.5f, game.graphics.PreferredBackBufferWidth - uvRect.Width * 2.0f),
+                                   MathHelper.Clamp(position.Y, 0 + uvRect.Height * 0.5f, game.graphics.PreferredBackBufferHeight - uvRect.Height * 0.5f));
         }
 
         protected void Action(GameTime gameTime) {
