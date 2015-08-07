@@ -52,3 +52,5 @@ D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\D
 D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D9.xml
 D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Sprite\Characters\Runner.png
 C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Sprite\Characters\Runner.png
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Sprite\Explosion.png
+D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\Content\line.png

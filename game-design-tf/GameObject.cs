@@ -28,20 +28,23 @@ namespace game_design_tf {
             game.sceneControl.GetScene().gameObjectList.Add(this);
         }
 
+        public void Update(GameTime gametime) {
+            ApplyPhysics(gametime);
+        }
+
         public void Draw(SpriteBatch spriteBatch) {
-            //      System.Diagnostics.Debug.WriteLine("uv: " + uvRect.Location.X / 83 + "," + uvRect.Location.Y / 53);
             Vector2 origin = new Vector2(uvRect.Width * 0.5f, uvRect.Height * 0.5f);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
             spriteBatch.Draw(spriteSheet, position, null, uvRect, origin, 0f, Vector2.One, Color.White, SpriteEffects.None, 0f);
             spriteBatch.End();
         }
 
-        public void Update(GameTime gametime) {
-            ApplyPhysics(gametime);
-        }
-
         protected void ApplyPhysics(GameTime gametime) {
             collision.Update(gametime);
+        }
+
+        public void Explode() {
+            System.Diagnostics.Debug.WriteLine("Explode " + name);
         }
     }
 }

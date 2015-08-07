@@ -24,9 +24,8 @@ namespace game_design_tf {
         public bool canControl = true;
         public bool canMove = true;
         public CharacterState state = CharacterState.Idle;
+        public IPlayerInput input;
         CharacterState previousState;
-        IPlayerInput input;
-
         Animator animator = new Animator();
 
         public BaseCharacter(Texture2D spriteSheet, MainGame.Tag tag, Vector2 position, string name, MainGame game, IPlayerInput input)
@@ -68,7 +67,6 @@ namespace game_design_tf {
 
         protected void Movement(GameTime gameTime) {
 
-
             Vector2 direction = input.GetDirection();
             if (direction == Vector2.Zero) {
                 velocity.X = MathHelper.Lerp(velocity.X, 0, deceleration_Walk);
@@ -82,37 +80,6 @@ namespace game_design_tf {
                 velocity += direction * acceleration_Walk;
             }
             velocity = new Vector2(MathHelper.Clamp(velocity.X, -1f, 1f), MathHelper.Clamp(velocity.Y, -1f, 1f));
-
-            /*
-            Vector2 hitDirection;
-            GameObject objHit;
-            if (collision.Blocked(out hitDirection, out objHit)) { //Path obstructed
-                if (hitDirection.X > 0) {
-                    position.X = objHit.position.X - objHit.uvRect.Width;
-                    System.Diagnostics.Debug.WriteLine("Collision X RIGHT");
-                }
-                else if (hitDirection.X < 0) {
-                    velocity.X = MathHelper.Clamp(velocity.X, 0f, 1f);
-                    System.Diagnostics.Debug.WriteLine("Collision X LEFT");
-                }
-                else {
-                    velocity.X = MathHelper.Clamp(velocity.X, -1f, 0f);
-                    System.Diagnostics.Debug.WriteLine("Collision X SAME");
-                }
-
-                if (hitDirection.Y > 0) {
-                    velocity.Y = MathHelper.Clamp(velocity.Y, -1f, 0f);
-                    //System.Diagnostics.Debug.WriteLine("Collision Y BELOW");
-                }
-                else if (hitDirection.Y < 0) {
-                    //velocity.Y = MathHelper.Clamp(velocity.Y, 0f, 1f);
-                    System.Diagnostics.Debug.WriteLine("Collision Y ABOVE");
-                }
-                else {
-                    //velocity.Y = MathHelper.Clamp(velocity.Y, 0f, -1f);
-                    System.Diagnostics.Debug.WriteLine("Collision Y SAME");
-                }
-            }*/
 
             position += (velocity * speed_Walk) * (float)gameTime.ElapsedGameTime.TotalSeconds;
             //Clamp position to scene borders
