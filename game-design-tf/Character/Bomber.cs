@@ -25,6 +25,7 @@ namespace game_design_tf {
                     Movement(gametime);
                 }
             }
+            ReturnFlag();
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
@@ -33,13 +34,24 @@ namespace game_design_tf {
 
         void ActivateBomb() {
             bool button1 = input.GetButton1();
-            if ( button1  && !previousButton1State ) {
+            if (button1 && !previousButton1State) {
                 if (!bombActive) {
                     Bomb bomb = new Bomb(bombSize, 3f, this);
                     bombActive = true;
                 }
             }
             previousButton1State = button1;
+        }
+
+        void ReturnFlag() {
+            if (game.sceneControl.GetScene().flagList.Count > 0) {
+                foreach (Flag flag in game.sceneControl.GetScene().flagList) {
+                    if (CollisionRectangle.Intersects(flag.CollisionRectangle)) {
+                        flag.ResetPosition();
+                        System.Diagnostics.Debug.WriteLine("ResetPosition");
+                    }
+                }
+            }
         }
     }
 }

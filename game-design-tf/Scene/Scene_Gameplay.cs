@@ -11,7 +11,7 @@ namespace game_design_tf {
     public class Scene_Gameplay : Scene {
 
         public IPlayerInput WhiteInput { get; set; }
-        public const int maxScore = 2;
+        public const int maxScore = 1;
         public Rectangle scoringArea;
         public int roundNumber = 0;
         Scoreboard scoreboard = new Scoreboard();
@@ -44,6 +44,7 @@ namespace game_design_tf {
             PreGame,
             Play,
             EndRound,
+            GameEnd
         }
 
         public void Update(GameTime gameTime) {
@@ -53,15 +54,19 @@ namespace game_design_tf {
                     break;
                 case State.PreGame:
                     PreFight(gameTime);
-                    runner.canControl = false;
+                    runner.canControl = true;
                     break;
                 case State.Play:
-                    CheckEndRound(gameTime);
-                    runner.canControl = false;
+                    CheckGameEnd(gameTime);
+                    runner.canControl = true;
+                    Score();
                     break;
                 case State.EndRound:
                     runner.canControl = false;
-                    Restart();
+                    RestartRound();
+                    break;
+                case State.GameEnd:
+                    RestartGame();
                     break;
             }
             Debug.Update();
@@ -70,7 +75,6 @@ namespace game_design_tf {
             bomber.Update(gameTime);
             flag.Update(gameTime);
             UpdateBombs(gameTime);
-            Score();
         }
 
         public void Draw() {
@@ -104,6 +108,8 @@ namespace game_design_tf {
                     bomber.Draw(game.spriteBatch);
                     testDummy.Draw(game.spriteBatch);
                     break;
+                case State.GameEnd:
+                    break;
             }
             DrawBombs();
             game.spriteBatch.End();
@@ -117,8 +123,9 @@ namespace game_design_tf {
         }
 
         void Score() {
-            if (scoringArea.Contains(runner.position)) {
+            if (runner.flag != null && scoringArea.Contains(runner.position)) {
                 scoreboard.AddScore(MainGame.Tag.Runner, 1);
+                state = State.EndRound;
             }
         }
 
@@ -131,19 +138,24 @@ namespace game_design_tf {
             return false;
         }
 
-        void CheckEndRound(GameTime gameTime) {
+        void CheckGameEnd(GameTime gameTime) {
             bool timerEnded;
             endGameTimer.TimerCounter(gameTime, 20f, out timerEnded);
             if (GameEnded()) {
-                state = State.EndRound;
+                state = State.GameEnd;
             }
             else if (timerEnded) {
                 state = State.EndRound;
             }
         }
 
-        void Restart() {
+        void RestartRound() {
             game.sceneControl.gameplay = new Scene_Gameplay(game, roundNumber + 1, scoreboard);
+            game.sceneControl.EnterScene(SceneType.Gameplay);
+        }
+
+        void RestartGame() {
+            game.sceneControl.gameplay = new Scene_Gameplay(game);
             game.sceneControl.EnterScene(SceneType.Gameplay);
         }
 
@@ -199,13 +211,12 @@ namespace game_design_tf {
             scoringArea = new Rectangle(0, 0, 30, game.graphics.PreferredBackBufferHeight);
             flag = new Flag(game);
 
-            IPlayerInput input = new GamePadInput(PlayerIndex.One);
+            IPlayerInput input = new KeyboardInput();
             Vector2 runnerStartingPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.5f, game.graphics.PreferredBackBufferHeight * 0.5f);
-            runner = new Runner(characterSprite, MainGame.Tag.Runner, runnerStartingPosition, "runner", game, flag, input);
+            runner = new Runner(characterSprite, MainGame.Tag.Runner, runnerStartingPosition, "runner", game, input);
             runner.velocity = Vector2.Zero;
 
-
-            input = new KeyboardInput();
+            input = new GamePadInput(PlayerIndex.One);
             input.DebugPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.333f, 0.0f);
             Vector2 bomberStartingPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.2f, game.graphics.PreferredBackBufferHeight * 0.5f);
             bomber = new Bomber(characterSprite, MainGame.Tag.Bomber, bomberStartingPosition, "bomber", game, input);
@@ -214,7 +225,7 @@ namespace game_design_tf {
             Vector2 testDummyStartingPosition = new Vector2(1300f, 450f);
             input = new GamePadInput(PlayerIndex.Two);
             input.DebugPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.666f, 0.0f);
-            testDummy = new Runner(characterSprite, MainGame.Tag.Runner, testDummyStartingPosition, "dummy", game, flag, input);
+            testDummy = new Runner(characterSprite, MainGame.Tag.Runner, testDummyStartingPosition, "dummy", game, input);
             testDummy.velocity = Vector2.Zero;
 
             state = State.PreGame;

@@ -81,10 +81,14 @@ namespace game_design_tf {
 
             objHit = null;
             foreach (GameObject obj in objList) {
-                if (collisionRectangle.Intersects(obj.CollisionRectangle)) {
-                    //bool what = this.CollisionRectangle.Intersects(obj.CollisionRectangle);
-                    objHit = obj;
-                    break;
+                if (obj.tag == MainGame.Tag.Bomber || 
+                    obj.tag == MainGame.Tag.Runner || 
+                    obj.tag == MainGame.Tag.Wall) {
+                    if (collisionRectangle.Intersects(obj.CollisionRectangle)) {
+                        //bool what = this.CollisionRectangle.Intersects(obj.CollisionRectangle);
+                        objHit = obj;
+                        break;
+                    }
                 }
             }
             

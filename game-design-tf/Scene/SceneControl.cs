@@ -45,13 +45,11 @@ namespace game_design_tf {
                 case SceneType.MainMenu:
                     break;
                 case SceneType.Gameplay:
-
                     break;
             }
         }
 
         public void Update(GameTime gameTime) {
-
             switch (currentScene) {
                 default:
                     break;
@@ -64,7 +62,6 @@ namespace game_design_tf {
         }
 
         public void Draw(SpriteBatch spriteBatch, ContentManager content, GraphicsDeviceManager graphics) {
-
             switch (currentScene) {
                 default:
                     break;

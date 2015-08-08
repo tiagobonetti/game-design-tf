@@ -8,7 +8,7 @@ using System.Text;
 namespace game_design_tf {
     public class Flag : GameObject{
 
-        public BaseCharacter Carrier { get; set; }
+        public Runner Carrier { get; set; }
         public const float resetPositionCountdown = 5f;
         Vector2 defaultPosition;
         Timer timer = new Timer();
@@ -16,6 +16,8 @@ namespace game_design_tf {
         public Flag(MainGame game) : base(game.Content.Load<Texture2D>("Sprite/Flag"), MainGame.Tag.Flag, Vector2.One, "Flag", game) {
             defaultPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.9f, game.graphics.PreferredBackBufferHeight * 0.5f);
             position = defaultPosition;
+            baseRectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
+            game.sceneControl.GetScene().flagList.Add(this);
         }
 
         override public void Update(GameTime gameTime) {
@@ -29,13 +31,15 @@ namespace game_design_tf {
             }
         }
 
-        public void PickUp(BaseCharacter character) {
-            Carrier = character;
+        public void PickUp(Runner runner) {
+            Carrier = runner;
+            runner.flag = this;
         }
 
         public void Drop() {
             if (Carrier != null){
                 position = Carrier.position;
+                Carrier.flag = null;
                 Carrier = null;
             }
         }

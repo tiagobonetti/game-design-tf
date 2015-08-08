@@ -8,6 +8,7 @@ namespace game_design_tf {
 
         public IList<GameObject> gameObjectList = new List<GameObject>();
         public IList<Bomb> bombList = new List<Bomb>();
+        public IList<Flag> flagList = new List<Flag>();
         public MainGame game;
     }
 }
