@@ -134,10 +134,10 @@ namespace game_design_tf {
             }
             else {
                 elapsedTime = 0;
-                currentGameObject.uvRect = new Rectangle(currentAnimation.spriteRectPosition.X * FrameIndex,
+                currentGameObject.baseRectangle = new Rectangle(currentAnimation.spriteRectPosition.X * FrameIndex,
                                                          currentAnimation.spriteRectPosition.Y,
-                                                         currentGameObject.uvRect.Width,
-                                                         currentGameObject.uvRect.Height);
+                                                         currentGameObject.baseRectangle.Width,
+                                                         currentGameObject.baseRectangle.Height);
                 FrameIndex++;
             }
             if (FrameIndex > currentAnimation.size - 1) {
@@ -154,10 +154,10 @@ namespace game_design_tf {
             }
             else {
                 elapsedTime = 0;
-                currentGameObject.uvRect = new Rectangle(currentAnimation.spriteRectPosition.X * FrameIndex,
+                currentGameObject.baseRectangle = new Rectangle(currentAnimation.spriteRectPosition.X * FrameIndex,
                                                          currentAnimation.spriteRectPosition.Y,
-                                                         currentGameObject.uvRect.Width,
-                                                         currentGameObject.uvRect.Height);
+                                                         currentGameObject.baseRectangle.Width,
+                                                         currentGameObject.baseRectangle.Height);
                 FrameIndex++;
                 // System.Diagnostics.Debug.WriteLine("PlayLoopAnimation Index " + FrameIndex);
             }
@@ -174,10 +174,10 @@ namespace game_design_tf {
             else {
                 elapsedTime = 0;
                 // System.Diagnostics.Debug.WriteLine("PlayLoopAnimationBackwards Index " + FrameIndex);
-                currentGameObject.uvRect = new Rectangle(currentAnimation.spriteRectPosition.X * FrameIndex,
+                currentGameObject.baseRectangle = new Rectangle(currentAnimation.spriteRectPosition.X * FrameIndex,
                                                          currentAnimation.spriteRectPosition.Y,
-                                                         currentGameObject.uvRect.Width,
-                                                         currentGameObject.uvRect.Height);
+                                                         currentGameObject.baseRectangle.Width,
+                                                         currentGameObject.baseRectangle.Height);
                 FrameIndex--;
             }
             if (FrameIndex <= currentAnimation.size) {
@@ -194,10 +194,10 @@ namespace game_design_tf {
                 elapsedTime = 0;
                 FrameIndex--;
                 if (FrameIndex >= 0)
-                    currentGameObject.uvRect = new Rectangle(currentAnimation.spriteRectPosition.X * FrameIndex,
+                    currentGameObject.baseRectangle = new Rectangle(currentAnimation.spriteRectPosition.X * FrameIndex,
                                                              currentAnimation.spriteRectPosition.Y,
-                                                             currentGameObject.uvRect.Width,
-                                                             currentGameObject.uvRect.Height);
+                                                             currentGameObject.baseRectangle.Width,
+                                                             currentGameObject.baseRectangle.Height);
             }
             if (FrameIndex <= 0) {
                 EnterState(State.Stop);

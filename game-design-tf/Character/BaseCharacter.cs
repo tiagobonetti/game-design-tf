@@ -28,13 +28,20 @@ namespace game_design_tf {
         CharacterState previousState;
         Animator animator = new Animator();
 
-        public BaseCharacter(Texture2D spriteSheet, MainGame.Tag tag, Vector2 position, string name, MainGame game, IPlayerInput input)
-            : base(spriteSheet, tag, position, name, game) {
+        public BaseCharacter(Texture2D sprite, MainGame.Tag tag, Vector2 position, string name, MainGame game, IPlayerInput input)
+            : base(sprite, tag, position, name, game) {
 
-            uvRect = new Rectangle(0, 0, 50, 50);
+            baseRectangle = new Rectangle(0, 0, 50, 50);
             velocity = Vector2.Zero;
             this.input = input;
 
+        }
+
+        override public void Draw(SpriteBatch spriteBatch) {
+            base.Draw(spriteBatch);
+            if (input != null) {
+                input.DrawDebug(spriteBatch);
+            }
         }
 
         void EvalInput(GameTime gameTime, CharacterState newState) {
@@ -83,8 +90,8 @@ namespace game_design_tf {
 
             position += (velocity * speed_Walk) * (float)gameTime.ElapsedGameTime.TotalSeconds;
             //Clamp position to scene borders
-            position = new Vector2(MathHelper.Clamp(position.X, 0 + uvRect.Width * 0.5f, game.graphics.PreferredBackBufferWidth - uvRect.Width * 2.0f),
-                                   MathHelper.Clamp(position.Y, 0 + uvRect.Height * 0.5f, game.graphics.PreferredBackBufferHeight - uvRect.Height * 0.5f));
+            position = new Vector2(MathHelper.Clamp(position.X, 0 + baseRectangle.Width * 0.5f, game.graphics.PreferredBackBufferWidth - baseRectangle.Width * 0.5f),
+                                   MathHelper.Clamp(position.Y, 0 + baseRectangle.Height * 0.5f, game.graphics.PreferredBackBufferHeight - baseRectangle.Height * 0.5f));
         }
 
         protected void Action(GameTime gameTime) {

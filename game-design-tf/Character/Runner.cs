@@ -13,7 +13,7 @@ namespace game_design_tf {
         public Runner(Texture2D spriteSheet, MainGame.Tag tag, Vector2 position, string name, MainGame game, IPlayerInput input)
             : base(spriteSheet, tag, position, name, game, input) {
             this.PlayerInput = null;
-            collision = new CollisionBox(this, uvRect);
+            collision = new CollisionBox(this, baseRectangle);
             DEBUG_Collision.CollisionList.Add(collision);
         }
 

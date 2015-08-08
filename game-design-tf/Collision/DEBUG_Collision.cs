@@ -48,9 +48,9 @@ namespace game_design_tf {
                     }
                     rectTexture.SetData(data);
 
-                    spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
+                    //spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
                     spriteBatch.Draw(rectTexture, new Vector2(rect.X, rect.Y), Color.White);
-                    spriteBatch.End();
+                    //spriteBatch.End();
                 }
             }
         }

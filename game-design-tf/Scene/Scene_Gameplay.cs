@@ -71,6 +71,8 @@ namespace game_design_tf {
         }
 
         public void Draw() {
+
+            game.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
             switch (state) {
                 case State.BuildGameObjects:
                     DrawBackground();
@@ -80,23 +82,26 @@ namespace game_design_tf {
                     DrawBackground();
                     DrawClock();
                     runner.Draw(game.spriteBatch);
+                    bomber.Draw(game.spriteBatch);
                     testDummy.Draw(game.spriteBatch);
                     break;
                 case State.Play:
                     DrawBackground();
                     DrawClock();
                     runner.Draw(game.spriteBatch);
+                    bomber.Draw(game.spriteBatch);
                     testDummy.Draw(game.spriteBatch);
                     break;
                 case State.EndRound:
                     DrawBackground();
                     runner.Draw(game.spriteBatch);
+                    bomber.Draw(game.spriteBatch);
                     testDummy.Draw(game.spriteBatch);
                     break;
             }
-            bomber.Draw(game.spriteBatch);
             DrawBombs();
             debugCollision.Draw(game.spriteBatch);
+            game.spriteBatch.End();
         }
 
         void PreFight(GameTime gameTime) {
@@ -131,11 +136,9 @@ namespace game_design_tf {
 
         void DrawClock() {
             Vector2 pos = new Vector2(game.graphics.PreferredBackBufferWidth * 0.5f, game.graphics.PreferredBackBufferHeight * 0.1f);
-            Vector2 size = arial20.MeasureString(endGameTimer.GetTimeDecreasing().ToString());
+            Vector2 size = arial20.MeasureString(endGameTimer.GetTimeDecreasing().ToString("N2"));
             Vector2 origin = size * 0.5f;
-            game.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
-            game.spriteBatch.DrawString(arial20, endGameTimer.GetTimeDecreasing().ToString(), pos, Color.Cyan, 0.0f, origin, 1.0f, SpriteEffects.None, 1.0f);
-            game.spriteBatch.End();
+            game.spriteBatch.DrawString(arial20, endGameTimer.GetTimeDecreasing().ToString("N2"), pos, Color.Cyan, 0.0f, origin, 1.0f, SpriteEffects.None, 1.0f);
         }
 
         void DrawBackground() {
@@ -180,19 +183,23 @@ namespace game_design_tf {
 
         void BuildGameObjects() {
 
+            IPlayerInput input = new GamePadInput(PlayerIndex.One);
             Vector2 runnerStartingPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.5f, game.graphics.PreferredBackBufferHeight * 0.5f);
-            runner = new Runner(characterSprite, MainGame.Tag.Runner, runnerStartingPosition, "runner", game, new GamePadInput(PlayerIndex.One));
+            runner = new Runner(characterSprite, MainGame.Tag.Runner, runnerStartingPosition, "runner", game, input);
             runner.velocity = Vector2.Zero;
 
+
+            input = new KeyboardInput();
+            input.DebugPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.333f, 0.0f);
             Vector2 bomberStartingPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.2f, game.graphics.PreferredBackBufferHeight * 0.5f);
-            bomber = new Bomber(characterSprite, MainGame.Tag.Bomber, bomberStartingPosition, "bomber", game, new KeyboardInput());
-            runner.velocity = Vector2.Zero;
+            bomber = new Bomber(characterSprite, MainGame.Tag.Bomber, bomberStartingPosition, "bomber", game, input);
+            bomber.velocity = Vector2.Zero;
 
             Vector2 testDummyStartingPosition = new Vector2(1300f, 450f);
-            testDummy = new Runner(characterSprite, MainGame.Tag.Runner, testDummyStartingPosition, "dummy", game, new GamePadInput(PlayerIndex.Two));
+            input = new GamePadInput(PlayerIndex.Two);
+            input.DebugPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.666f, 0.0f);
+            testDummy = new Runner(characterSprite, MainGame.Tag.Runner, testDummyStartingPosition, "dummy", game, input);
             testDummy.velocity = Vector2.Zero;
-            //testDummy.canControl = false;
-            obj2 = testDummy;
 
             state = State.PreGame;
         }
