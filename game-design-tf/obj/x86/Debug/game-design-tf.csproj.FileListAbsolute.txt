@@ -1,29 +1,3 @@
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\game-design-tf.exe
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\game-design-tf.pdb
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\MonoGame.Framework.dll
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.MediaFoundation.dll
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.dll
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XAudio2.dll
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D11.dll
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.DXGI.dll
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct2D1.dll
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XInput.dll
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.RawInput.dll
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D9.dll
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\MonoGame.Framework.xml
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.MediaFoundation.xml
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.xml
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XAudio2.xml
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D11.xml
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.DXGI.xml
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct2D1.xml
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XInput.xml
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.RawInput.xml
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D9.xml
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.csprojResolveAssemblyReference.cache
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.exe
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.pdb
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\Content\arial20.xnb
 D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.exe
 D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.pdb
 D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.csprojResolveAssemblyReference.cache
@@ -51,6 +25,34 @@ D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\D
 D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.RawInput.xml
 D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D9.xml
 D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Sprite\Characters\Runner.png
-C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Sprite\Characters\Runner.png
 D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Sprite\Explosion.png
 D:\Marcelo\Projeto\PUCRS\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\Content\line.png
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\Content\line.png
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Sprite\Explosion.png
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Sprite\Characters\Runner.png
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Arial20.xnb
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\game-design-tf.exe
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\game-design-tf.pdb
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.dll
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XAudio2.dll
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D11.dll
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.DXGI.dll
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct2D1.dll
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XInput.dll
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.RawInput.dll
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\MonoGame.Framework.xml
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.xml
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XAudio2.xml
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D11.xml
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.DXGI.xml
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct2D1.xml
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XInput.xml
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.RawInput.xml
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D9.xml
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.csprojResolveAssemblyReference.cache
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.exe
+C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.pdb

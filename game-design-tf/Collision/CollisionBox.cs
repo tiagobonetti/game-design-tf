@@ -30,8 +30,8 @@ namespace game_design_tf {
         }
 
         public void Update(GameTime gametime) {
-            rect.X = (int)(owner.position.X - owner.uvRect.Width * 0.5f);
-            rect.Y = (int)(owner.position.Y - owner.uvRect.Height * 0.5f);
+            rect.X = (int)(owner.position.X - owner.baseRectangle.Width * 0.5f);
+            rect.Y = (int)(owner.position.Y - owner.baseRectangle.Height * 0.5f);
         }
         /*
         public bool Blocked(out Vector2 hitDirection, out GameObject objHit) {
