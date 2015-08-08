@@ -27,11 +27,11 @@ namespace game_design_tf {
             collision = new CollisionBox(this, uvRect);
             game.sceneControl.GetScene().gameObjectList.Add(this);
         }
-
+        /*
         public void Update(GameTime gametime) {
             ApplyPhysics(gametime);
         }
-
+        */
         public void Draw(SpriteBatch spriteBatch) {
             Vector2 origin = new Vector2(uvRect.Width * 0.5f, uvRect.Height * 0.5f);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
