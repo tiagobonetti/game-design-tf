@@ -10,17 +10,14 @@ namespace game_design_tf {
     public class Bomber : BaseCharacter {
         public bool bombActive = false;
         bool previousButton1State;
-        const float bombSize = 200f;
+        const float bombSize = 100f;
 
         public Bomber(Texture2D spriteSheet, MainGame.Tag tag, Vector2 position, string name, MainGame game, IPlayerInput input)
             : base(spriteSheet, tag, position, name, game, input) {
-            collision = new CollisionBox(this, baseRectangle);
-            DEBUG_Collision.CollisionList.Add(collision);
         }
 
         new public void Update(GameTime gametime) {
             CharacterState state = CharacterState.Idle;
-            StateMachine(gametime, state);
             if (canControl) {
                 Action(gametime);
                 ActivateBomb();
@@ -28,7 +25,6 @@ namespace game_design_tf {
                     Movement(gametime);
                 }
             }
-            ApplyPhysics(gametime);
         }
 
         public override void Draw(SpriteBatch spriteBatch) {

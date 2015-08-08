@@ -12,7 +12,6 @@ namespace game_design_tf {
         public Rectangle baseRectangle;
         public MainGame.Tag tag;
         public string name;
-        public CollisionBox collision;
         public Vector2 position;
         public MainGame game;
         public Vector2 velocity = Vector2.Zero;
@@ -24,23 +23,21 @@ namespace game_design_tf {
             this.tag = tag;
             this.position = position;
             baseRectangle = new Rectangle(0, 0, 1, 1);
-            collision = new CollisionBox(this, baseRectangle);
             game.sceneControl.GetScene().gameObjectList.Add(this);
         }
 
         public virtual void Update(GameTime gametime) {
-            ApplyPhysics(gametime);
         }
 
         public virtual void Draw(SpriteBatch spriteBatch) {
             Vector2 origin = new Vector2(baseRectangle.Width * 0.5f, baseRectangle.Height * 0.5f);
-            //spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
             spriteBatch.Draw(sprite, position, null, baseRectangle, origin, 0f, Vector2.One, Color.White, SpriteEffects.None, 0f);
-            //spriteBatch.End();
         }
 
-        protected void ApplyPhysics(GameTime gametime) {
-            collision.Update(gametime);
+        public Rectangle CollisionRectangle {
+            get {
+                return new Rectangle((int)position.X, (int)position.Y, (int)baseRectangle.Width, (int)baseRectangle.Height);
+            }
         }
 
         public void Explode() {

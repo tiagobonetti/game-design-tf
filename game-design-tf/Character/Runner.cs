@@ -15,13 +15,10 @@ namespace game_design_tf {
             : base(spriteSheet, tag, position, name, game, input) {
             this.PlayerInput = null;
             this.flag = flag;
-            collision = new CollisionBox(this, baseRectangle);
-            DEBUG_Collision.CollisionList.Add(collision);
         }
 
         new public void Update(GameTime gametime) {
             CharacterState state = CharacterState.Idle;
-            StateMachine(gametime, state);
             if (canControl) {
                 Action(gametime);
                 if (canMove) {
@@ -29,7 +26,6 @@ namespace game_design_tf {
                 }
             }
             PickUpFlag();
-            ApplyPhysics(gametime);
         }
 
         void PickUpFlag(){

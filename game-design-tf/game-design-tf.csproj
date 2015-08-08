@@ -59,8 +59,6 @@
     <Compile Include="Character\Bomber.cs" />
     <Compile Include="Character\Bomb.cs" />
     <Compile Include="Character\Runner.cs" />
-    <Compile Include="Collision\CollisionBox.cs" />
-    <Compile Include="Collision\DEBUG_Collision.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Flag.cs" />
     <Compile Include="GameObject.cs" />

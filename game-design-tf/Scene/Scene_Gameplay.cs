@@ -15,7 +15,6 @@ namespace game_design_tf {
         public Rectangle scoringArea;
         public int roundNumber = 0;
         Scoreboard scoreboard = new Scoreboard();
-        DEBUG_Collision debugCollision = new DEBUG_Collision();
         Timer timer = new Timer();
         SpriteFont arial20;
         Timer endGameTimer = new Timer();
@@ -65,7 +64,6 @@ namespace game_design_tf {
                     Restart();
                     break;
             }
-            debugCollision.Update(gameTime);
             Debug.Update();
             runner.Update(gameTime);
             testDummy.Update(gameTime);
@@ -108,7 +106,6 @@ namespace game_design_tf {
                     break;
             }
             DrawBombs();
-            debugCollision.Draw(game.spriteBatch);
             game.spriteBatch.End();
         }
 

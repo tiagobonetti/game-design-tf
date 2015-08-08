@@ -21,11 +21,15 @@ namespace game_design_tf {
         public const float speed_Run = 1000;
         public const float acceleration_Run = 0.1f;
         public const float deceleration_Run = 0.05f;
+
         public bool canControl = true;
         public bool canMove = true;
-        public CharacterState state = CharacterState.Idle;
+
+        //collision
+        GameObject objHit = null;
+        public bool collided = false;
+
         public IPlayerInput input;
-        CharacterState previousState;
         Animator animator = new Animator();
 
         public BaseCharacter(Texture2D sprite, MainGame.Tag tag, Vector2 position, string name, MainGame game, IPlayerInput input)
@@ -42,33 +46,8 @@ namespace game_design_tf {
             if (input != null) {
                 input.DrawDebug(spriteBatch);
             }
-        }
-
-        void EvalInput(GameTime gameTime, CharacterState newState) {
-            //System.Diagnostics.Debug.WriteLine("State: " + state.ToString() + " Input: " + input.ToString());
-            if (newState == state) {
-            }
-
-            switch (state) {
-            }
-        }
-
-        void ChangeState(CharacterState newState, GameTime gameTime) {
-            //System.Diagnostics.Debug.WriteLine("OnEntry: State: " + newState.ToString() + " Name: " + name);
-            previousState = state;
-            state = newState;
-            // On exit
-            switch (previousState) {
-            }
-            // On Entry
-            switch (state) {
-
-            }
-        }
-
-        protected void StateMachine(GameTime gameTime, CharacterState newState) {
-            EvalInput(gameTime, newState);
-            switch (state) {
+            if (this is Bomber) {
+                Debug.DrawText(game.spriteBatch, new Vector2(0.0f, 600.0f), "Vel: " + velocity.ToString() );
             }
         }
 
@@ -88,21 +67,40 @@ namespace game_design_tf {
             }
             velocity = new Vector2(MathHelper.Clamp(velocity.X, -1f, 1f), MathHelper.Clamp(velocity.Y, -1f, 1f));
 
-            position += (velocity * speed_Walk) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Vector2 newPosition = position + (velocity * speed_Walk) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             //Clamp position to scene borders
-            position = new Vector2(MathHelper.Clamp(position.X, 0 + baseRectangle.Width * 0.5f, game.graphics.PreferredBackBufferWidth - baseRectangle.Width * 0.5f),
-                                   MathHelper.Clamp(position.Y, 0 + baseRectangle.Height * 0.5f, game.graphics.PreferredBackBufferHeight - baseRectangle.Height * 0.5f));
+            newPosition = new Vector2(MathHelper.Clamp(newPosition.X, 0 + baseRectangle.Width * 0.5f,
+                                                       game.graphics.PreferredBackBufferWidth - baseRectangle.Width * 0.5f),
+                                      MathHelper.Clamp(newPosition.Y, 0 + baseRectangle.Height * 0.5f,
+                                                       game.graphics.PreferredBackBufferHeight - baseRectangle.Height * 0.5f));
+
+            IList<GameObject> objList = game.sceneControl.GetScene().gameObjectList.Where(gameObject => gameObject != this).ToList();
+
+            Rectangle collisionRectangle = new Rectangle((int)newPosition.X, (int)newPosition.Y, (int) baseRectangle.Width, (int)baseRectangle.Height);
+
+            objHit = null;
+            foreach (GameObject obj in objList) {
+                if (collisionRectangle.Intersects(obj.CollisionRectangle)) {
+                    //bool what = this.CollisionRectangle.Intersects(obj.CollisionRectangle);
+                    objHit = obj;
+                    break;
+                }
+            }
+            
+            if (objHit == null) {
+                position = newPosition;
+            }
+            else {
+                collided = true;
+                velocity = Vector2.Zero;
+            }
         }
 
         protected void Action(GameTime gameTime) {
             if (Keyboard.GetState().IsKeyDown(Keys.Space)) {
                 //Run modifier.
             }
-        }
-
-        public bool TakeHit(GameTime gameTime) {
-            System.Diagnostics.Debug.WriteLine("Take Hit!");
-            return true;
         }
     }
 }
