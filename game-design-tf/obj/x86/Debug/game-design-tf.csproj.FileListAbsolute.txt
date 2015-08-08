@@ -56,3 +56,32 @@ C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\bin\Windows\Deb
 C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.csprojResolveAssemblyReference.cache
 C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.exe
 C:\Users\Tiago\JogosDigitais\Games\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.pdb
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\Content\line.png
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Sprite\Explosion.png
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Sprite\Characters\Runner.png
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\Content\Arial20.xnb
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\game-design-tf.exe
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\game-design-tf.pdb
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\MonoGame.Framework.dll
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.MediaFoundation.dll
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.dll
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XAudio2.dll
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D11.dll
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.DXGI.dll
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct2D1.dll
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XInput.dll
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.RawInput.dll
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D9.dll
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\MonoGame.Framework.xml
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.MediaFoundation.xml
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.xml
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XAudio2.xml
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D11.xml
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.DXGI.xml
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct2D1.xml
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.XInput.xml
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.RawInput.xml
+H:\Game Design\game-design-tf\game-design-tf\bin\Windows\Debug\SharpDX.Direct3D9.xml
+H:\Game Design\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.csprojResolveAssemblyReference.cache
+H:\Game Design\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.exe
+H:\Game Design\game-design-tf\game-design-tf\obj\x86\Debug\game-design-tf.pdb

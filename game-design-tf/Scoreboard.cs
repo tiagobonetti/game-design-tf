@@ -13,8 +13,8 @@ namespace game_design_tf {
             Score[1] = 0;
         }
 
-        public void AddScore(string name, float score, CharacterState attackState) {
-            if (name == "p1")
+        public void AddScore(MainGame.Tag tag, float score) {
+            if (tag == MainGame.Tag.Runner)
                 this.Score[0] += score;
             else
                 this.Score[1] += score;

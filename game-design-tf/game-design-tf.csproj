@@ -62,6 +62,7 @@
     <Compile Include="Collision\CollisionBox.cs" />
     <Compile Include="Collision\DEBUG_Collision.cs" />
     <Compile Include="Debug.cs" />
+    <Compile Include="Flag.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Input\GamePadInput.cs" />

@@ -13,12 +13,20 @@ namespace game_design_tf {
         Vector2 defaultPosition;
         Timer timer = new Timer();
 
-        public Flag(MainGame game) : base(game.Content.Load<Texture2D>("Sprite/Flag"), MainGame.Tag.Runner, Vector2.One, "Flag", game) {
-            defaultPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.1f, game.graphics.PreferredBackBufferHeight * 0.9f);
+        public Flag(MainGame game) : base(game.Content.Load<Texture2D>("Sprite/Flag"), MainGame.Tag.Flag, Vector2.One, "Flag", game) {
+            defaultPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.9f, game.graphics.PreferredBackBufferHeight * 0.5f);
+            position = defaultPosition;
         }
 
-        public void Update(GameTime gameTime) {
+        override public void Update(GameTime gameTime) {
             ResetCountdown(gameTime);
+        }
+
+        override public void Draw(SpriteBatch spriteBatch) {
+            if (Carrier == null) {
+                Vector2 origin = new Vector2(sprite.Width * 0.5f, sprite.Height * 0.5f);
+                spriteBatch.Draw(sprite, position, null, null, origin, 0f, Vector2.One, Color.White, SpriteEffects.None, 0f);
+            }
         }
 
         public void PickUp(BaseCharacter character) {

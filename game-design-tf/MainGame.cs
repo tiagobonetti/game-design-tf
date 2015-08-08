@@ -46,7 +46,8 @@ namespace game_design_tf {
 
         public enum Tag{
             Runner,
-            Bomber
+            Bomber,
+            Flag
         }
     }
 }
