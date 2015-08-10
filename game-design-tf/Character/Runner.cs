@@ -25,19 +25,22 @@ namespace game_design_tf {
         }
 
         new public void Update(GameTime gametime) {
-            CharacterState state = CharacterState.Idle;
-            if (canControl && canMove) {
-                    UpdateMovement(gametime);
+            if (dead) {
+                UpdateRespawn(gametime);
             }
-            PickUpFlag();
-            DropFlag();
-
-            if (characterHit != null) {
-                characterHit.Die();
+            else {
+                if (canControl && canMove) {
+                    UpdateMovement(gametime);
+                }
+                PickUpFlag();
+                DropFlag();
+                if (characterHit != null) {
+                    characterHit.Die();
+                }
             }
         }
 
-        void PickUpFlag(){
+        void PickUpFlag() {
             if (game.sceneControl.GetScene().flagList.Count > 0) {
                 foreach (Flag flag in game.sceneControl.GetScene().flagList) {
                     if (CollisionRectangle.Intersects(flag.CollisionRectangle)) {

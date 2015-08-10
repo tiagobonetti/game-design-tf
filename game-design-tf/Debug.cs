@@ -21,6 +21,9 @@ namespace game_design_tf {
             if (enabled)
                 sb.DrawString(arial20, text, pos, Color.Cyan, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 1.0f);
         }
+        public static Vector2 MeasureString(string text) {
+                return arial20.MeasureString(text);
+        }
 
         public static void Update() {
             if (Keyboard.GetState().IsKeyDown(Keys.F1) && previousButtonState != Keyboard.GetState()) {

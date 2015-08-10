@@ -29,7 +29,7 @@ namespace game_design_tf {
 
         public SceneGameplay(MainGame game) {
             this.game = game;
-            Init();
+            Load();
         }
 
         public SceneGameplay(MainGame game, int roundNumber, Scoreboard scoreBoard) {
@@ -37,7 +37,7 @@ namespace game_design_tf {
             this.roundNumber = roundNumber;
             this.scoreboard = scoreBoard;
             System.Diagnostics.Debug.WriteLine("Round " + roundNumber + " Score " + scoreboard.Score[0]);
-            Init();
+            Load();
         }
 
         enum State {
@@ -100,7 +100,6 @@ namespace game_design_tf {
             bomberB.Update(gameTime);
             bomberA.Update(gameTime);
             flag.Update(gameTime);
-            UpdateBombs(gameTime);
         }
 
         public void Draw() {
@@ -124,7 +123,6 @@ namespace game_design_tf {
                 case State.GameEnd:
                     break;
             }
-            DrawBombs();
             game.spriteBatch.End();
         }
 
@@ -184,30 +182,7 @@ namespace game_design_tf {
             game.graphics.GraphicsDevice.Clear(Color.Black);
         }
 
-        void UpdateBombs(GameTime gameTime) {
-            if (bombList.Count > 0) {
-                foreach (Bomb bomb in bombList) {
-                    bomb.Update(gameTime);
-                }
-                IList<Bomb> newBombList = new List<Bomb>();
-                foreach (Bomb bomb in bombList) {
-                    if (!bomb.Dead) {
-                        newBombList.Add(bomb);
-                    }
-                }
-                bombList = newBombList;
-            }
-        }
-
-        void DrawBombs() {
-            if (bombList.Count > 0) {
-                foreach (Bomb bomb in bombList) {
-                    bomb.Draw();
-                }
-            }
-        }
-
-        public virtual void Init() {
+        public virtual void Load() {
             Runner.Load(game.Content);
             Bomber.Load(game.Content);
             arial20 = game.Content.Load<SpriteFont>("Arial20");
@@ -215,7 +190,6 @@ namespace game_design_tf {
         }
 
         void BuildGameObjects() {
-
             scoringArea = new Rectangle(0, 0, 30, game.graphics.PreferredBackBufferHeight);
             flag = new Flag(game);
 
@@ -225,7 +199,7 @@ namespace game_design_tf {
             //runner
             Vector2 startingPosition = new Vector2(screenWidth * 0.1f, screenHeight * 0.5f);
             IPlayerInput input = new KeyboardInput();
-            runner = new Runner(startingPosition, "runner", game, input);
+            runner = new Runner(startingPosition, "Run", game, input);
             runner.DebugPosition = new Vector2(0.0f, screenHeight * 0.8f);
             characterList.Add(runner);
 
@@ -233,7 +207,7 @@ namespace game_design_tf {
             startingPosition = new Vector2(screenWidth * 0.5f, screenHeight * 0.5f);
             input = new GamePadInput(PlayerIndex.One);
             input.DebugPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.333f, 0.0f);
-            bomberA = new Bomber(startingPosition, "bomber", game, input);
+            bomberA = new Bomber(startingPosition, "A", game, input);
             bomberA.DebugPosition = new Vector2(screenWidth * 0.333f, screenHeight * 0.8f);
             characterList.Add(bomberA);
 
@@ -241,7 +215,7 @@ namespace game_design_tf {
             startingPosition = new Vector2(screenWidth * 0.7f, screenHeight * 0.5f);
             input = new GamePadInput(PlayerIndex.Two);
             input.DebugPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.666f, 0.0f);
-            bomberB = new Bomber(startingPosition, "dummy", game, input);
+            bomberB = new Bomber(startingPosition, "B", game, input);
             bomberB.DebugPosition = new Vector2(screenWidth * 0.666f, screenHeight * 0.8f);
             bomberB.velocity = Vector2.Zero;
             characterList.Add(bomberB);

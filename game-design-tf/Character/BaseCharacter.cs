@@ -30,24 +30,52 @@ namespace game_design_tf {
         public bool collided;
         public bool dead = false;
 
-        public IPlayerInput input;
-        Animator animator = new Animator();
+        public Timer respawnTimer;
+        public float respawnTime = 1.0f;
+
+        public static Random random = new Random();
+        public Vector2 defaultSpawnPosition = new Vector2(0.0f, 0.0f);
+        public Vector2 SpawnPosition {
+            set {
+                defaultSpawnPosition = value;
+            }
+            get {
+                Vector2 spawnPosition = defaultSpawnPosition;
+                Vector2 offset = Vector2.Zero;
+                while ( GetCollisions(spawnPosition + offset) != null) {
+                    float randomX = (float)random.NextDouble() - 0.5f;
+                    float randomY = (float)random.NextDouble() - 0.5f;
+                    offset = (150.0f * new Vector2(randomX, randomY));
+                }
+                return spawnPosition + offset;
+            }
+        }
 
         //Debug
         public Vector2 DebugPosition { get; set; }
 
-        public BaseCharacter(Texture2D sprite, MainGame.Tag tag, Vector2 position, string name, MainGame game, IPlayerInput input)
-            : base(sprite, tag, position, name, game) {
+        public IPlayerInput input;
+        Animator animator = new Animator();
+
+        public BaseCharacter(Texture2D sprite, MainGame.Tag tag, Vector2 spawnPosition, string name, MainGame game, IPlayerInput input)
+            : base(sprite, tag, spawnPosition, name, game) {
             baseRectangle = new Rectangle(0, 0, 50, 50);
             velocity = Vector2.Zero;
+            this.SpawnPosition = spawnPosition;
             this.input = input;
             Reset();
         }
 
-        public void Reset() {
+        public virtual void Reset() {
+            respawnTimer = new Timer();
             characterHit = null;
             collided = false;
             dead = false;
+        }
+
+        public void Respawn() {
+            position = SpawnPosition;
+            Reset();
         }
 
         override public void Draw(SpriteBatch spriteBatch) {
@@ -59,11 +87,23 @@ namespace game_design_tf {
                 input.DrawDebug(spriteBatch);
             }
 
-            string msg = tag.ToString();
+            Vector2 stringSize = Debug.MeasureString(name);
+            Debug.DrawText(game.spriteBatch, position - (stringSize * 0.5f), name);
+
+            string msg = "Name: " + name;
             msg += "\nDead: " + dead.ToString();
             msg += "\nP: " + position.ToString();
             msg += "\nV: " + velocity.ToString();
+            msg += "\nRespawn: " + respawnTimer.GetTimeDecreasing().ToString();
             Debug.DrawText(game.spriteBatch, DebugPosition, msg);
+        }
+
+        protected void UpdateRespawn(GameTime gameTime) {
+            bool ended = false;
+            respawnTimer.TimerCounter(gameTime, respawnTime, out ended);
+            if (ended) {
+                Respawn();
+            }
         }
 
         protected void UpdateMovement(GameTime gameTime) {
@@ -90,23 +130,8 @@ namespace game_design_tf {
                                       MathHelper.Clamp(newPosition.Y, 0 + baseRectangle.Height * 0.5f,
                                                        game.graphics.PreferredBackBufferHeight - baseRectangle.Height * 0.5f));
 
-            List<BaseCharacter> characterList = game.sceneControl.gameplay.characterList;
-            characterList = characterList.Where(character => character != this).ToList();
-            characterList = characterList.Where(character => !character.dead).ToList();
-
-
-            Rectangle newCollisionRectangle = new Rectangle((int)newPosition.X,
-                                                         (int)newPosition.Y,
-                                                         (int)baseRectangle.Width,
-                                                         (int)baseRectangle.Height);
-
             characterHit = null;
-            foreach (BaseCharacter character in characterList) {
-                if (newCollisionRectangle.Intersects(character.CollisionRectangle)) {
-                    characterHit = character;
-                    break;
-                }
-            }
+            characterHit = GetCollisions(newPosition);
 
             if (characterHit == null) {
                 position = newPosition;
@@ -115,6 +140,28 @@ namespace game_design_tf {
                 collided = true;
                 velocity = Vector2.Zero;
             }
+        }
+
+
+        public BaseCharacter GetCollisions(Vector2 position) {
+
+            List<BaseCharacter> characterList = game.sceneControl.gameplay.characterList;
+            characterList = characterList.Where(character => character != this).ToList();
+            characterList = characterList.Where(character => !character.dead).ToList();
+
+            Rectangle newCollisionRectangle = new Rectangle((int)position.X,
+                                                         (int)position.Y,
+                                                         (int)baseRectangle.Width,
+                                                         (int)baseRectangle.Height);
+
+            BaseCharacter characterHit = null;
+            foreach (BaseCharacter character in characterList) {
+                if (newCollisionRectangle.Intersects(character.CollisionRectangle)) {
+                    characterHit = character;
+                    break;
+                }
+            }
+            return characterHit;
         }
 
         public void Die() {

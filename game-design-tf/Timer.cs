@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 namespace game_design_tf {
-    class Timer {
+    public class Timer {
         float elapsedTime = 0;
         float length;
 

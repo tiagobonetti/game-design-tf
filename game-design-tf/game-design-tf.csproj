@@ -57,7 +57,6 @@
     <Compile Include="Animation\Animator.cs" />
     <Compile Include="Character\BaseCharacter.cs" />
     <Compile Include="Character\Bomber.cs" />
-    <Compile Include="Character\Bomb.cs" />
     <Compile Include="Character\Runner.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Flag.cs" />
