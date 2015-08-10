@@ -17,7 +17,7 @@ namespace game_design_tf {
     public class SceneControl {
 
         public SceneType currentScene { get; private set; }
-        public Scene_Gameplay gameplay { get; set; }
+        public SceneGameplay gameplay { get; set; }
         public SceneTransition transition { get; set; }
 
         public bool transitioning;
@@ -26,7 +26,7 @@ namespace game_design_tf {
 
         public SceneControl(MainGame game) {
             this.game = game;
-            gameplay = new Scene_Gameplay(game);
+            gameplay = new SceneGameplay(game);
             currentScene = SceneType.None;
         }
 

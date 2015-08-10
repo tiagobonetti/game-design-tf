@@ -48,21 +48,20 @@ namespace game_design_tf {
         }
 
         void Kill() {
-            foreach (GameObject obj in GetObjectsHit()) {
-                obj.Explode();
+            foreach (BaseCharacter character in GetObjectsHit()) {
+                character.Die();
             }
         }
 
-        IList<GameObject> GetObjectsHit() {
-            IList<GameObject> objList = game.sceneControl.GetScene().gameObjectList;
-            IList<GameObject> objHit = new List<GameObject>();
-            foreach (GameObject obj in objList) {
-                float distance = Vector2.Distance(position, obj.position);
-                if (distance <= Radius + obj.sprite.Width / Math.Sqrt(2) ) {
-                    objHit.Add(obj);
+        List<BaseCharacter> GetObjectsHit() {
+            List<BaseCharacter> charactersHit = new List<BaseCharacter>();
+            foreach (BaseCharacter character in game.sceneControl.gameplay.characterList) {
+                float distance = Vector2.Distance(position, character.position);
+                if (distance <= Radius + character.sprite.Width / Math.Sqrt(2)) {
+                    charactersHit.Add(character);
                 }
             }
-            return objHit;
+            return charactersHit;
         }
 
     }

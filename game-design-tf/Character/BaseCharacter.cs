@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace game_design_tf {
         Dead,
     }
 
-    public class BaseCharacter : GameObject {
+    public abstract class BaseCharacter : GameObject {
         public const float speed_Walk = 500;
         public const float acceleration_Walk = 0.1f;
         public const float deceleration_Walk = 0.05f;
@@ -25,33 +26,47 @@ namespace game_design_tf {
         public bool canControl = true;
         public bool canMove = true;
 
-        //collision
-        GameObject objHit = null;
-        public bool collided = false;
+        public BaseCharacter characterHit;
+        public bool collided;
+        public bool dead = false;
 
         public IPlayerInput input;
         Animator animator = new Animator();
 
+        //Debug
+        public Vector2 DebugPosition { get; set; }
+
         public BaseCharacter(Texture2D sprite, MainGame.Tag tag, Vector2 position, string name, MainGame game, IPlayerInput input)
             : base(sprite, tag, position, name, game) {
-
             baseRectangle = new Rectangle(0, 0, 50, 50);
             velocity = Vector2.Zero;
             this.input = input;
+            Reset();
+        }
 
+        public void Reset() {
+            characterHit = null;
+            collided = false;
+            dead = false;
         }
 
         override public void Draw(SpriteBatch spriteBatch) {
-            base.Draw(spriteBatch);
+            if (!dead) {
+                base.Draw(spriteBatch);
+            }
+
             if (input != null) {
                 input.DrawDebug(spriteBatch);
             }
-            if (this is Bomber) {
-                Debug.DrawText(game.spriteBatch, new Vector2(0.0f, 600.0f), "Vel: " + velocity.ToString() );
-            }
+
+            string msg = tag.ToString();
+            msg += "\nDead: " + dead.ToString();
+            msg += "\nP: " + position.ToString();
+            msg += "\nV: " + velocity.ToString();
+            Debug.DrawText(game.spriteBatch, DebugPosition, msg);
         }
 
-        protected void Movement(GameTime gameTime) {
+        protected void UpdateMovement(GameTime gameTime) {
 
             Vector2 direction = input.GetDirection();
             if (direction == Vector2.Zero) {
@@ -75,24 +90,25 @@ namespace game_design_tf {
                                       MathHelper.Clamp(newPosition.Y, 0 + baseRectangle.Height * 0.5f,
                                                        game.graphics.PreferredBackBufferHeight - baseRectangle.Height * 0.5f));
 
-            IList<GameObject> objList = game.sceneControl.GetScene().gameObjectList.Where(gameObject => gameObject != this).ToList();
+            List<BaseCharacter> characterList = game.sceneControl.gameplay.characterList;
+            characterList = characterList.Where(character => character != this).ToList();
+            characterList = characterList.Where(character => !character.dead).ToList();
 
-            Rectangle collisionRectangle = new Rectangle((int)newPosition.X, (int)newPosition.Y, (int) baseRectangle.Width, (int)baseRectangle.Height);
 
-            objHit = null;
-            foreach (GameObject obj in objList) {
-                if (obj.tag == MainGame.Tag.Bomber || 
-                    obj.tag == MainGame.Tag.Runner || 
-                    obj.tag == MainGame.Tag.Wall) {
-                    if (collisionRectangle.Intersects(obj.CollisionRectangle)) {
-                        //bool what = this.CollisionRectangle.Intersects(obj.CollisionRectangle);
-                        objHit = obj;
-                        break;
-                    }
+            Rectangle newCollisionRectangle = new Rectangle((int)newPosition.X,
+                                                         (int)newPosition.Y,
+                                                         (int)baseRectangle.Width,
+                                                         (int)baseRectangle.Height);
+
+            characterHit = null;
+            foreach (BaseCharacter character in characterList) {
+                if (newCollisionRectangle.Intersects(character.CollisionRectangle)) {
+                    characterHit = character;
+                    break;
                 }
             }
-            
-            if (objHit == null) {
+
+            if (characterHit == null) {
                 position = newPosition;
             }
             else {
@@ -101,10 +117,10 @@ namespace game_design_tf {
             }
         }
 
-        protected void Action(GameTime gameTime) {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space)) {
-                //Run modifier.
-            }
+        public void Die() {
+            dead = true;
         }
+
+
     }
 }

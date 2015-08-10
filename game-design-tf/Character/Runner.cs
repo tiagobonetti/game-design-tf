@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +10,31 @@ using System.Text;
 namespace game_design_tf {
     public class Runner : BaseCharacter {
         public IPlayerInput PlayerInput { get; set; }
+
         bool previousButton1State;
         public Flag flag;
 
-        public Runner(Texture2D spriteSheet, MainGame.Tag tag, Vector2 position, string name, MainGame game, IPlayerInput input)
-            : base(spriteSheet, tag, position, name, game, input) {
+        static Texture2D runnerSprite;
+        static public void Load(ContentManager content) {
+            runnerSprite = content.Load<Texture2D>("Sprite/Characters/Runner");
+        }
+
+        public Runner(Vector2 position, string name, MainGame game, IPlayerInput input)
+            : base(runnerSprite, MainGame.Tag.Runner, position, name, game, input) {
             this.PlayerInput = null;
         }
 
         new public void Update(GameTime gametime) {
             CharacterState state = CharacterState.Idle;
-            if (canControl) {
-                Action(gametime);
-                if (canMove) {
-                    Movement(gametime);
-                }
+            if (canControl && canMove) {
+                    UpdateMovement(gametime);
             }
             PickUpFlag();
             DropFlag();
+
+            if (characterHit != null) {
+                characterHit.Die();
+            }
         }
 
         void PickUpFlag(){
@@ -34,6 +42,7 @@ namespace game_design_tf {
                 foreach (Flag flag in game.sceneControl.GetScene().flagList) {
                     if (CollisionRectangle.Intersects(flag.CollisionRectangle)) {
                         flag.PickUp(this);
+                        baseColor = Color.ForestGreen;
                         System.Diagnostics.Debug.WriteLine("pickup");
                     }
                 }

@@ -9,7 +9,10 @@ namespace game_design_tf {
     public class GameObject {
 
         public Texture2D sprite;
+
         public Rectangle baseRectangle;
+        public Color baseColor;
+
         public MainGame.Tag tag;
         public string name;
         public Vector2 position;
@@ -23,7 +26,7 @@ namespace game_design_tf {
             this.tag = tag;
             this.position = position;
             baseRectangle = new Rectangle(0, 0, 1, 1);
-            game.sceneControl.GetScene().gameObjectList.Add(this);
+            baseColor = Color.White;
         }
 
         public virtual void Update(GameTime gametime) {
@@ -31,7 +34,7 @@ namespace game_design_tf {
 
         public virtual void Draw(SpriteBatch spriteBatch) {
             Vector2 origin = new Vector2(baseRectangle.Width * 0.5f, baseRectangle.Height * 0.5f);
-            spriteBatch.Draw(sprite, position, null, baseRectangle, origin, 0f, Vector2.One, Color.White, SpriteEffects.None, 0f);
+            spriteBatch.Draw(sprite, position, null, baseRectangle, origin, 0f, Vector2.One, baseColor, SpriteEffects.None, 0f);
         }
 
         public Rectangle CollisionRectangle {
@@ -40,8 +43,5 @@ namespace game_design_tf {
             }
         }
 
-        public void Explode() {
-            System.Diagnostics.Debug.WriteLine("Explode " + name);
-        }
     }
 }

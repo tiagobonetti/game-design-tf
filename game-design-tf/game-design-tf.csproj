@@ -71,7 +71,7 @@
     <Compile Include="Scene\Scene.cs" />
     <Compile Include="Scene\SceneControl.cs" />
     <Compile Include="Scene\SceneTransition.cs" />
-    <Compile Include="Scene\Scene_Gameplay.cs" />
+    <Compile Include="Scene\SceneGameplay.cs" />
     <Compile Include="Scoreboard.cs" />
     <Compile Include="Timer.cs" />
   </ItemGroup>
