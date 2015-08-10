@@ -13,6 +13,7 @@ namespace game_design_tf {
         public const int maxScore = 1;
         public Rectangle scoringArea;
         public int roundNumber = 0;
+        public float gameLength = 60;
         Scoreboard scoreboard = new Scoreboard();
         Timer timer = new Timer();
         SpriteFont arial20;
@@ -23,6 +24,7 @@ namespace game_design_tf {
         Runner runner;
         Bomber bomberA;
         Bomber bomberB;
+        Bomber bomberC;
 
         Flag flag;
         Texture2D bg;
@@ -97,6 +99,7 @@ namespace game_design_tf {
             }
             Debug.Update();
             runner.Update(gameTime);
+            bomberC.Update(gameTime);
             bomberB.Update(gameTime);
             bomberA.Update(gameTime);
             flag.Update(gameTime);
@@ -115,6 +118,7 @@ namespace game_design_tf {
                 case State.EndRound:
                     DrawBackground();
                     DrawClock();
+                    DrawScoreBoard();
                     flag.Draw(game.spriteBatch);
                     foreach (BaseCharacter character in characterList) {
                         character.Draw(game.spriteBatch);
@@ -152,7 +156,7 @@ namespace game_design_tf {
 
         void CheckGameEnd(GameTime gameTime) {
             bool timerEnded;
-            endGameTimer.TimerCounter(gameTime, 20f, out timerEnded);
+            endGameTimer.TimerCounter(gameTime, gameLength, out timerEnded);
             if (GameEnded()) {
                 ChangeState(State.GameEnd);
             }
@@ -177,6 +181,14 @@ namespace game_design_tf {
             Vector2 origin = size * 0.5f;
             game.spriteBatch.DrawString(arial20, endGameTimer.GetTimeDecreasing().ToString("N2"), pos, Color.Cyan, 0.0f, origin, 1.0f, SpriteEffects.None, 1.0f);
         }
+
+        void DrawScoreBoard() {
+           /* Vector2 pos = new Vector2(game.graphics.PreferredBackBufferWidth * 0.5f, game.graphics.PreferredBackBufferHeight * 0.9f);
+            Vector2 size = arial20.MeasureString(endGameTimer.GetTimeDecreasing().ToString("N2"));
+            Vector2 origin = size * 0.5f;
+            game.spriteBatch.DrawString(arial20, scoreboard.Score[0].ToString(), pos, Color.Cyan, 0.0f, origin, 1.0f, SpriteEffects.None, 1.0f);*/
+        }
+
 
         void DrawBackground() {
             game.graphics.GraphicsDevice.Clear(Color.Black);
@@ -204,21 +216,30 @@ namespace game_design_tf {
             characterList.Add(runner);
 
             // bomber A
-            startingPosition = new Vector2(screenWidth * 0.5f, screenHeight * 0.5f);
+            startingPosition = new Vector2(screenWidth * 0.35f, screenHeight * 0.15f);
             input = new GamePadInput(PlayerIndex.One);
-            input.DebugPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.333f, 0.0f);
+            input.DebugPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.25f, 0.0f);
             bomberA = new Bomber(startingPosition, "A", game, input);
-            bomberA.DebugPosition = new Vector2(screenWidth * 0.333f, screenHeight * 0.8f);
+            bomberA.DebugPosition = new Vector2(screenWidth * 0.25f, screenHeight * 0.8f);
             characterList.Add(bomberA);
 
             // bomber B
-            startingPosition = new Vector2(screenWidth * 0.7f, screenHeight * 0.5f);
+            startingPosition = new Vector2(screenWidth * 0.55f, screenHeight * 0.15f);
             input = new GamePadInput(PlayerIndex.Two);
-            input.DebugPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.666f, 0.0f);
+            input.DebugPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.50f, 0.0f);
             bomberB = new Bomber(startingPosition, "B", game, input);
-            bomberB.DebugPosition = new Vector2(screenWidth * 0.666f, screenHeight * 0.8f);
+            bomberB.DebugPosition = new Vector2(screenWidth * 0.50f, screenHeight * 0.8f);
             bomberB.velocity = Vector2.Zero;
             characterList.Add(bomberB);
+
+            // bomber C
+            startingPosition = new Vector2(screenWidth * 0.75f, screenHeight * 0.85f);
+            input = new GamePadInput(PlayerIndex.Three);
+            input.DebugPosition = new Vector2(game.graphics.PreferredBackBufferWidth * 0.75f, 0.0f);
+            bomberC = new Bomber(startingPosition, "C", game, input);
+            bomberC.DebugPosition = new Vector2(screenWidth * 0.75f, screenHeight * 0.8f);
+            bomberC.velocity = Vector2.Zero;
+            characterList.Add(bomberC);
 
             ChangeState(State.PreGame);
         }

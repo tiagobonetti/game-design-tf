@@ -29,9 +29,6 @@ namespace game_design_tf {
             baseColor = Color.White;
         }
 
-        public virtual void Update(GameTime gametime) {
-        }
-
         public virtual void Draw(SpriteBatch spriteBatch) {
             Vector2 origin = new Vector2(baseRectangle.Width * 0.5f, baseRectangle.Height * 0.5f);
             spriteBatch.Draw(sprite, position, null, baseRectangle, origin, 0f, Vector2.One, baseColor, SpriteEffects.None, 0f);

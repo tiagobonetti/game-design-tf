@@ -16,12 +16,12 @@ namespace game_design_tf {
     }
 
     public abstract class BaseCharacter : GameObject {
-        public const float speed_Walk = 500;
-        public const float acceleration_Walk = 0.1f;
-        public const float deceleration_Walk = 0.05f;
-        public const float speed_Run = 1000;
-        public const float acceleration_Run = 0.1f;
-        public const float deceleration_Run = 0.05f;
+        public float speed_Walk = 500;
+        public float acceleration_Walk = 0.1f;
+        public float deceleration_Walk = 0.05f;
+        public float speed_Run = 1000;
+        public float acceleration_Run = 0.1f;
+        public float deceleration_Run = 0.05f;
 
         public bool canControl = true;
         public bool canMove = true;
@@ -164,10 +164,8 @@ namespace game_design_tf {
             return characterHit;
         }
 
-        public void Die() {
+        virtual public void Die(BaseCharacter killer) {
             dead = true;
         }
-
-
     }
 }

@@ -22,9 +22,10 @@ namespace game_design_tf {
         public Runner(Vector2 position, string name, MainGame game, IPlayerInput input)
             : base(runnerSprite, MainGame.Tag.Runner, position, name, game, input) {
             this.PlayerInput = null;
+            speed_Walk = 550;
         }
 
-        new public void Update(GameTime gametime) {
+        public void Update(GameTime gametime) {
             if (dead) {
                 UpdateRespawn(gametime);
             }
@@ -35,7 +36,7 @@ namespace game_design_tf {
                 PickUpFlag();
                 DropFlag();
                 if (characterHit != null) {
-                    characterHit.Die();
+                    characterHit.Die(this);
                 }
             }
         }

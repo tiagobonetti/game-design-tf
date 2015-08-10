@@ -15,7 +15,7 @@ namespace game_design_tf {
         bool previousButton1State;
         Timer triggerTimer;
 
-        const float explosionMaxSize = 100f;
+        const float explosionMaxSize = 185f;
         const float explosionTime = 1f;
         public bool exploding;
         float explodingSize;
@@ -34,6 +34,7 @@ namespace game_design_tf {
         public Bomber(Vector2 position, string name, MainGame game, IPlayerInput input)
             : base(bomberSprite, MainGame.Tag.Bomber, position, name, game, input) {
             baseColor = bomberColor;
+            respawnTime = 0.85f;
         }
 
         public override void Reset() {
@@ -79,7 +80,7 @@ namespace game_design_tf {
                 Vector2 origin = new Vector2(sprite.Width * 0.5f, sprite.Height * 0.5f);
                 explodingSize = MathHelper.Lerp(explodingSize, explosionMaxSize, 0.33f);
                 float scale = 2.0f * explodingSize / sprite.Width;
-                spriteBatch.Draw(sprite, position, null, null, origin, 0f, Vector2.One * scale, explodingColor, SpriteEffects.None, 0f);
+                spriteBatch.Draw(explosionSprite, position, null, null, origin, 0f, Vector2.One * scale, explodingColor, SpriteEffects.None, 0f);
             }
         }
 
@@ -108,7 +109,7 @@ namespace game_design_tf {
             foreach (BaseCharacter character in characterList) {
                 float distance = Vector2.Distance(position, character.position);
                 if (distance <= explodingSize + character.sprite.Width / Math.Sqrt(2)) {
-                    character.Die();
+                    character.Die(this);
                 }
             }
 
@@ -133,6 +134,15 @@ namespace game_design_tf {
         void Explode() {
             exploding = true;
             dead = true;
+        }
+
+        public override void Die(BaseCharacter killer) {
+            if (killer.tag == MainGame.Tag.Bomber) {
+                Explode();
+            }
+            else {
+                base.Die(killer);
+            }
         }
     }
 }
